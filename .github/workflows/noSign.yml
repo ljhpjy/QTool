@@ -1,6 +1,8 @@
-name: NoSign Build
+name: noSign build
 
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -16,8 +18,6 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: gradle
-      - name: Install CMake
-        run: sudo apt-get install -y cmake=3.18.1
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
@@ -31,4 +31,4 @@ jobs:
           cd ../..
           git submodule update --init --recursive
           echo $CommitNumber
-          ./gradlew :QTool:assembleRelease --warning-mode all
+          ./gradlew :QTool:assembleRelease
